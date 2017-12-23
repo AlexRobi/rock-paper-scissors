@@ -1,0 +1,105 @@
+/* Media queryies */
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  #selection {
+    font-size: 1.4em!important;
+  }
+  .btn {
+    font-size: 1.1em!important;
+  }
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+  .rock, .scissors, .paper, .none {
+    width: 200px!important;
+    height: 200px!important;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {}
+body {
+  font-family: 'Indie Flower', cursive!important;
+  background: url(images/background.jpg);
+}
+
+#versus {
+  font-size: 3em;
+  transition: all 0.7s ease;
+}
+
+#info {
+  font-weight: bold;
+  transition: all 0.7s ease;
+}
+
+.none {
+  background-image: url(images/question-mark-ico.png);
+  transition: background-image 0.2s ease-in-out;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+.rock {
+  background-image: url(images/rock-ico.png);
+  transition: background-image 0.2s ease-in-out;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+
+.scissors {
+    background-image: url(images/scissors-ico.png);
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+}
+
+.paper {
+  background-image: url(images/paper-ico.png);
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+
+.default {
+  border: 3px solid black;
+  border-radius: 15px;
+  box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.win {
+  border: 3px solid green;
+  border-radius: 15px;
+  box-shadow:0 0 10px rgba(0, 125, 0, 0.5);
+}
+
+.lose {
+  border: 3px solid red;
+  border-radius: 15px;
+  box-shadow:0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.tie {
+  border: 3px solid #ffc700;
+  border-radius: 15px;
+  box-shadow:0 0 10px rgba(255, 199, 0, 0.5);
+}
+
+#info {
+  font-size: 1.5em;
+}
+
+td {
+  font-size: 2em;
+}
+
+footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: arial, sans-serif;
+  font-size: 0.85em;
+}
