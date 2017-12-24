@@ -35,10 +35,10 @@ function playRound(playerSelection, computerSelection) {
   let beforeComputerRound = computerRounds;
   if (playerSelection === "rock") {
     if (computerSelection === "paper") {
-      information.textContent = ("YOU LOSE!\r\nPaper beats Rock.");
+      information.textContent = ("YOU LOSE THE ROUND!\r\nPaper beats Rock.");
       computerRounds++;
     } else if (computerSelection === "scissors") {
-      information.textContent = ("YOU WIN!\r\nRock beats Scissors.");
+      information.textContent = ("YOU WIN THE ROUND!\r\nRock beats Scissors.");
       playerRounds++;
     } else {
       information.textContent = ("IT'S A TIE!");
@@ -46,10 +46,10 @@ function playRound(playerSelection, computerSelection) {
     }
   } else if (playerSelection === "paper") {
     if (computerSelection === "scissors") {
-      information.textContent = ("YOU LOSE!\r\nScissors beats Paper.");
+      information.textContent = ("YOU LOSE THE ROUND!\r\nScissors beats Paper.");
       computerRounds++;
     } else if (computerSelection === "rock") {
-      information.textContent = ("YOU WIN!\r\nPaper beats Rock.");
+      information.textContent = ("YOU WIN THE ROUND!\r\nPaper beats Rock.");
       playerRounds++;
     } else {
       information.textContent = ("IT'S A TIE!");
@@ -57,10 +57,10 @@ function playRound(playerSelection, computerSelection) {
     }
   } else {
     if (computerSelection === "rock") {
-      information.textContent = ("YOU LOSE!\r\nRock beats Scissors.");
+      information.textContent = ("YOU LOSE THE ROUND!\r\nRock beats Scissors.");
       computerRounds++;
     } else if (computerSelection === "paper") {
-      information.textContent = ("YOU WIN!\r\nScissors beats Paper.");
+      information.textContent = ("YOU WIN THE ROUND!\r\nScissors beats Paper.");
       playerRounds++;
     } else {
       information.textContent = ("IT'S A TIE!");
@@ -79,4 +79,18 @@ function playRound(playerSelection, computerSelection) {
   playerScore.textContent = playerRounds;
   computerScore.textContent = computerRounds;
   tieScore.textContent = tieRounds;
-}
+
+  if (playerRounds === 5) {
+    resetPoints();
+    information.textContent = "YOU WIN THE GAME!";
+  } else if (computerRounds === 5) {
+    resetPoints();
+    information.textContent = "YOU LOST THE GAME!";
+  };
+};
+
+function resetPoints() {
+  playerRounds = 0;
+  computerRounds= 0;
+  tieRounds = 0;
+};
