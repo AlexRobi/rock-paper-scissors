@@ -65,20 +65,16 @@ function playRound(playerSelection, computerSelection) {
   tieScore.textContent = score[2];
 
   if (score[0] === 5) {
-    resetPoints();
     information.textContent = "YOU WIN THE GAME!";
+    score = [0, 0, 0];
   } else if (score[1] === 5) {
-    resetPoints();
     information.textContent = "YOU LOST THE GAME!";
+    score = [0, 0, 0];
   };
 };
 
 function removeClass(item) {
   item.classList.remove("rock", "paper", "scissors", "none", "win", "lose", "tie", "default");
-};
-
-function resetPoints() {
-  score = [0, 0, 0]
 };
 
 function loseRound() {
