@@ -1,7 +1,4 @@
-// Declare the variables needed.
-let playerRounds = 0;
-let computerRounds = 0;
-let tieRounds = 0;
+let score = [0, 0, 0]
 let playerVersus = document.getElementById("player-versus");
 let computerVersus = document.getElementById("computer-versus");
 let versus = document.getElementById("versus");
@@ -9,11 +6,13 @@ let information = document.getElementById("information");
 let playerScore = document.getElementById("player-score");
 let computerScore = document.getElementById("computer-score");
 let tieScore = document.getElementById("tie-score");
+let playerSelection = null;
+let computerSelection = null;
 
 const choices = document.querySelectorAll(`button[class="btn btn-outline-dark"]`);
 choices.forEach(choice => choice.onclick = function() {
-  let playerSelection = choice.id;
-  let computerSelection = computerPlay();
+  playerSelection = choice.id
+  computerSelection = computerPlay();
   playRound(playerSelection, computerSelection);
 });
 
@@ -26,71 +25,80 @@ function computerPlay() {
 };
 
 function playRound(playerSelection, computerSelection) {
-  playerVersus.classList.remove("rock", "paper", "scissors", "none");
-  computerVersus.classList.remove("rock", "paper", "scissors", "none");
-  versus.classList.remove("win", "lose", "tie", "default");
+  removeClass(playerVersus);
+  removeClass(computerVersus);
+  removeClass(versus);
   playerVersus.classList.add(`${playerSelection}`);
   computerVersus.classList.add(`${computerSelection}`);
-  let beforePlayerRound = playerRounds;
-  let beforeComputerRound = computerRounds;
+  let beforePlayerRound = score[0];
+  let beforeComputerRound = score[1];
+
   if (playerSelection === "rock") {
     if (computerSelection === "paper") {
-      information.textContent = ("YOU LOSE THE ROUND!\r\nPaper beats Rock.");
-      computerRounds++;
+      loseRound();
     } else if (computerSelection === "scissors") {
-      information.textContent = ("YOU WIN THE ROUND!\r\nRock beats Scissors.");
-      playerRounds++;
+      winRound();
     } else {
       information.textContent = ("IT'S A TIE!");
-      tieRounds++;
+      tieRound();
     }
   } else if (playerSelection === "paper") {
     if (computerSelection === "scissors") {
-      information.textContent = ("YOU LOSE THE ROUND!\r\nScissors beats Paper.");
-      computerRounds++;
+      loseRound();
     } else if (computerSelection === "rock") {
-      information.textContent = ("YOU WIN THE ROUND!\r\nPaper beats Rock.");
-      playerRounds++;
+      winRound();
     } else {
-      information.textContent = ("IT'S A TIE!");
-      tieRounds++;
+      tieRound();
     }
   } else {
     if (computerSelection === "rock") {
-      information.textContent = ("YOU LOSE THE ROUND!\r\nRock beats Scissors.");
-      computerRounds++;
+      loseRound();
     } else if (computerSelection === "paper") {
-      information.textContent = ("YOU WIN THE ROUND!\r\nScissors beats Paper.");
-      playerRounds++;
+      winRound();
     } else {
-      information.textContent = ("IT'S A TIE!");
-      tieRounds++;
+      tieRound();
     }
-  }
-  // Checks who won the round.
-  if (playerRounds > beforePlayerRound) {
-    versus.classList.add("win");
-  } else if (computerRounds > beforeComputerRound) {
-    versus.classList.add("lose");
-  } else {
-    versus.classList.add("tie");
   };
 
-  playerScore.textContent = playerRounds;
-  computerScore.textContent = computerRounds;
-  tieScore.textContent = tieRounds;
+  playerScore.textContent = score[0];
+  computerScore.textContent = score[1];
+  tieScore.textContent = score[2];
 
-  if (playerRounds === 5) {
+  if (score[0] === 5) {
     resetPoints();
     information.textContent = "YOU WIN THE GAME!";
-  } else if (computerRounds === 5) {
+  } else if (score[1] === 5) {
     resetPoints();
     information.textContent = "YOU LOST THE GAME!";
   };
 };
 
+function removeClass(item) {
+  item.classList.remove("rock", "paper", "scissors", "none", "win", "lose", "tie", "default");
+};
+
 function resetPoints() {
-  playerRounds = 0;
-  computerRounds= 0;
-  tieRounds = 0;
+  score = [0, 0, 0]
+};
+
+function loseRound() {
+  information.textContent = `YOU LOSE THE ROUND!\r\n${capitalizeFirstLetter(computerSelection)} beats ${capitalizeFirstLetter(playerSelection)}.`;
+  score[1] += 1;
+  versus.classList.add("lose");
+};
+
+function winRound() {
+  information.textContent = `YOU WIN THE ROUND!\r\n${capitalizeFirstLetter(playerSelection)} beats ${capitalizeFirstLetter(computerSelection)}.`;
+  score[0] += 1;
+  versus.classList.add("win");
+};
+
+function tieRound() {
+  information.textContent = "IT'S A TIE ROUND!";
+  score[2] += 1;
+  versus.classList.add("tie");
+};
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 };
