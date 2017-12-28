@@ -1,4 +1,14 @@
-let score = [0, 0, 0]
+let score = {
+  playerScore: 0,
+  computerScore: 0,
+  tieScore: 0,
+  updateScore: function() {
+    document.getElementById("player-score").textContent = this.playerScore;
+    document.getElementById("computer-score").textContent = this.computerScore;
+    document.getElementById("tie-score").textContent = this.tieScore;
+  },
+};
+
 let playerVersus = document.getElementById("player-versus");
 let computerVersus = document.getElementById("computer-versus");
 let versus = document.getElementById("versus");
@@ -27,8 +37,8 @@ function playRound(playerSelection, computerSelection) {
   removeClass(versus);
   playerVersus.setAttribute('class', `far fa-hand-${playerSelection}`)
   computerVersus.setAttribute('class', `far fa-hand-${computerSelection}`)
-  let beforePlayerRound = score[0];
-  let beforeComputerRound = score[1];
+  let beforePlayerRound = score.playerScore;
+  let beforeComputerRound = score.computerScore;
 
   if (playerSelection === "rock") {
     if (computerSelection === "paper") {
@@ -57,16 +67,22 @@ function playRound(playerSelection, computerSelection) {
     }
   };
 
-  document.getElementById("player-score").textContent = score[0];
-  document.getElementById("computer-score").textContent = score[1];
-  document.getElementById("tie-score").textContent = score[2];
+  score.updateScore();
 
-  if (score[0] === 5) {
+  if (score.playerScore === 5) {
     information.textContent = "YOU WIN THE GAME!";
-    score = [0, 0, 0];
-  } else if (score[1] === 5) {
+    resetScore(score);
+  } else if (score.computerScore === 5) {
     information.textContent = "YOU LOST THE GAME!";
-    score = [0, 0, 0];
+    resetScore(score);
+  };
+};
+
+function resetScore(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] == "number") {
+      obj[key] = 0;
+    };
   };
 };
 
@@ -80,7 +96,7 @@ function loseRound() {
     versus.classList.add("default");
   }, 1500);
   information.textContent = `YOU LOSE THE ROUND!\r\n${capitalizeFirstLetter(computerSelection)} beats ${capitalizeFirstLetter(playerSelection)}.`;
-  score[1] += 1;
+  score.computerScore += 1;
   versus.classList.add("lose");
   setTimeout(function() {
     versus.classList.remove("lose");
@@ -90,7 +106,7 @@ function loseRound() {
 
 function winRound() {
   information.textContent = `YOU WIN THE ROUND!\r\n${capitalizeFirstLetter(playerSelection)} beats ${capitalizeFirstLetter(computerSelection)}.`;
-  score[0] += 1;
+  score.playerScore += 1;
   versus.classList.add("win");
   setTimeout(function() {
     versus.classList.remove("win");
@@ -100,7 +116,7 @@ function winRound() {
 
 function tieRound() {
   information.textContent = "IT'S A TIE ROUND!";
-  score[2] += 1;
+  score.tieScore += 1;
   versus.classList.add("tie");
   setTimeout(function() {
     versus.classList.remove("tie");
