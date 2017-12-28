@@ -28,8 +28,8 @@ function playRound(playerSelection, computerSelection) {
   removeClass(playerVersus);
   removeClass(computerVersus);
   removeClass(versus);
-  playerVersus.classList.add(`${playerSelection}`);
-  computerVersus.classList.add(`${computerSelection}`);
+  playerVersus.setAttribute('class', `far fa-hand-${playerSelection}`)
+  computerVersus.setAttribute('class', `far fa-hand-${computerSelection}`)
   let beforePlayerRound = score[0];
   let beforeComputerRound = score[1];
 

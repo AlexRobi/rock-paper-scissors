@@ -38,6 +38,10 @@ body {
   transition: all 0.7s ease;
 }
 
+#versus .far {
+  font-size: 2em!important;
+}
+
 #information {
   font-weight: bold;
   transition: all 0.7s ease;
